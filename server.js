@@ -1,12 +1,17 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const helmet = require("helmet");
+const express = require("express")
+const bodyParser = require("body-parser")
+const cors = require("cors")
+const helmet = require("helmet")
 const compression = require('compression')
-const session = require('express-session');
+const session = require('express-session')
 const rateLimit = require('express-rate-limit')
-const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
+const favicon = require('serve-favicon')
+const morgan = require('morgan')
+const fs = require('fs')
+const path = require('path')
+const rfs = require('rotating-file-stream')
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -63,17 +68,35 @@ const createAccountLimiter = rateLimit({
   message: 'Too many accounts created from this IP, please try again after an hour'
 })
 
-
 const app = express();
 
 // Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB or API Gateway, Nginx, etc)
 // see https://expressjs.com/en/guide/behind-proxies.html
 // app.set('trust proxy', 1);
 
-app.use(cors({ origin: "*" }))
+// create a rotating write stream
+var accessLogStream = rfs.createStream('access.log', {
+  size: "10M", // rotate every 10 MegaBytes written
+  interval: "1d", // rotate daily
+  compress: "gzip",// compress rotated files
+  path: path.join(__dirname, 'log')
+})
+
+// setup the logger
+app.use(morgan('combined', { stream: accessLogStream }))
+
+app.use(favicon(path.join(__dirname, './public', 'favicon.ico')));
+
+app.use(cors({
+  origin: ['*'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["Content-Type", "Authorization"]
+}))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+app.disable("x-powered-by");
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -107,6 +130,11 @@ db.sequelize.sync({force: false}).then(() => {
 });
 */
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.get("/swagger.json", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
 
 app.get('*', function (req, res) {
   const error = new Error()
