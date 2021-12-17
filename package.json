@@ -1,9 +1,10 @@
 {
-  "name": "js-express-sequelize-pagination-mysql",
+  "name": "T2Area API",
   "version": "1.0.0",
-  "description": "Node.js Rest Apis with Express, Sequelize pagination & MySQL.",
+  "description": "API for FFTRI Trials",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,13 +17,23 @@
     "rest",
     "api"
   ],
-  "author": "bezkoder",
-  "license": "ISC",
+  "author": "elecoest",
+  "license": "Personnal",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "core-js": "^3.19.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mysql2": "^2.1.0",
-    "sequelize": "^5.21.12"
+    "express-rate-limit": "^5.5.1",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0-beta.1",
+    "sequelize-auto": "^0.8.6",
+    "swagger-jsdoc": "5.0.1",
+    "swagger-ui-express": "^4.3.0"
   }
 }
