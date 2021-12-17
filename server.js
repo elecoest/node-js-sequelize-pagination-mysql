@@ -7,7 +7,6 @@ const session = require('express-session');
 const rateLimit = require('express-rate-limit')
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-//const notFound = require('./app/middleware/notFound');
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -90,6 +89,7 @@ app.use(session({
 }))
 
 const db = require("./app/models")
+const Role = db.roles;
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to t2area application." })
@@ -101,8 +101,6 @@ require("./app/routes/edition.routes")(app)
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 
-const Role = db.roles;
-
 /*
 db.sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync Db');
@@ -110,8 +108,11 @@ db.sequelize.sync({force: false}).then(() => {
 */
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-//app.use(notFound)
-
+app.get('*', function (req, res) {
+  const error = new Error()
+  res.status(404).send('Not found - ' + req.originalUrl)
+  next()
+});
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
