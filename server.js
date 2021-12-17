@@ -7,9 +7,7 @@ const session = require('express-session')
 const rateLimit = require('express-rate-limit')
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
-const favicon = require('serve-favicon')
 const morgan = require('morgan')
-const fs = require('fs')
 const path = require('path')
 const rfs = require('rotating-file-stream')
 
@@ -84,8 +82,6 @@ var accessLogStream = rfs.createStream('access.log', {
 
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }))
-
-app.use(favicon(path.join(__dirname, './public', 'favicon.ico')));
 
 app.use(cors({
   origin: ['*'],
