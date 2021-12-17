@@ -111,7 +111,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('*', function (req, res) {
   const error = new Error()
   res.status(404).send('Not found - ' + req.originalUrl)
-  next()
 });
 
 // set port, listen for requests
