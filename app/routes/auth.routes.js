@@ -43,6 +43,8 @@ module.exports = function (app) {
      *            application/json:
      *              schema:
      *                $ref: "#/components/schemas/ErrorResponse"
+     *       429:
+     *         description: Too many requests. You exceed the authorized rate, please try again after an hour
      *       500:
      *         description: Error
      *         content:
@@ -99,6 +101,8 @@ module.exports = function (app) {
      *            application/json:
      *              schema:
      *                $ref: '#/components/schemas/ErrorResponse'
+     *       429:
+     *         description: Too many requests. You exceed the authorized rate, please try again after an hour
      *       500:
      *         description: Error
      *         content:

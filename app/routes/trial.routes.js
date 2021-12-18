@@ -39,6 +39,8 @@ module.exports = app => {
    *            application/json:
    *              schema:
    *                 $ref: '#/components/schemas/ErrorResponse'
+   *       429:
+   *         description: Too many requests. You exceed the authorized rate, please try again after an hour
    */
   router.get("/", trials.findAll);
 
@@ -72,6 +74,8 @@ module.exports = app => {
    *            application/json:
    *              schema:
    *                 $ref: '#/components/schemas/ErrorResponse'
+   *       429:
+   *         description: Too many requests. You exceed the authorized rate, please try again after an hour
    */
   router.get("/:id", trials.findOne);
 

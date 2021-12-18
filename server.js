@@ -63,7 +63,8 @@ const swaggerSpec = swaggerJSDoc(options);
 const createAccountLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour window
   max: 100, // start blocking after 5 requests
-  message: 'Too many accounts created from this IP, please try again after an hour'
+  message: 'Too many requests. You exceed the authorized rate, please try again after an hour',
+  statusCode: 429
 })
 
 const app = express();
@@ -98,6 +99,7 @@ app.disable("x-powered-by");
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(helmet())
 app.use(compression())
+app.use(createAccountLimiter);
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
