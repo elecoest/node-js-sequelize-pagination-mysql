@@ -26,7 +26,6 @@ db.events = require("./event.model.js")(sequelize, Sequelize);
 db.trials = require("./trial.model.js")(sequelize, Sequelize);
 db.editions = require("./edition.model.js")(sequelize, Sequelize);
 db.places = require("./place.model.js")(sequelize, Sequelize);
-
 db.roles = require("../models/role.model.js")(sequelize, Sequelize);
 db.users = require("../models/user.model.js")(sequelize, Sequelize);
 db.refreshToken = require("../models/refreshToken.model.js")(sequelize, Sequelize);

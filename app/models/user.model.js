@@ -9,6 +9,7 @@
  *           type: string
  *         email:
  *           type: string
+ *           format: email
  *         password:
  *           type: string
  *           format: password
@@ -45,6 +46,7 @@
  *        example: "admin"
  *      password:
  *        type: string
+ *        format: password
  *        example: "password"
  * 		required:
  *      - username
@@ -62,6 +64,7 @@
  *        type: string
  *      email:
  *        type: string
+ *        format: email
  *      roles:
  *        type: array
  *        items:

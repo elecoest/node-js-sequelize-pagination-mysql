@@ -1,3 +1,30 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Location:
+ *       type: object
+ *       properties:
+ *             id:
+ *                type: integer
+ *             state:
+ *                type: boolean
+ *             name:
+ *                type: string
+ *             streetAddress:
+ *                type: string
+ *             addressLocality:
+ *                type: string
+ *             postalCode:
+ *                type: string
+ *             addressCountry:
+ *                type: string
+ *             latitude:
+ *                type: string
+ *             longitude:
+ *                type: string
+ */
+
 const Sequelize = require('sequelize');
 
 module.exports = function (sequelize, DataTypes) {

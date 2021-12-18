@@ -24,26 +24,7 @@
  *           items:
  *              $ref: '#/components/schemas/Trial'
  *         location: 
- *           type: object
- *           properties:
- *             id:
- *                type: integer
- *             state:
- *                type: boolean
- *             name:
- *                type: string
- *             streetAddress:
- *                type: string
- *             addressLocality:
- *                type: string
- *             postalCode:
- *                type: string
- *             addressCountry:
- *                type: string
- *             latitude:
- *                type: string
- *             longitude:
- *                type: string
+ *           $ref: '#/components/schemas/Location'
  */
 
 const Sequelize = require('sequelize');
