@@ -42,7 +42,7 @@ exports.create = (req, res) => {
       res.status(200).send(data);
     })
     .catch(err => {
-      res.status(500).send({
+      res.status(400).send({
         message:
           err.message || "Some error occurred while creating the Event."
       });
