@@ -11,18 +11,26 @@
  *                type: boolean
  *             name:
  *                type: string
+ *                description: Name of the location
  *             streetAddress:
  *                type: string
+ *                description: The street Address
  *             addressLocality:
  *                type: string
+ *                description: The locality
  *             postalCode:
  *                type: string
+ *                description: The postal code.
  *             addressCountry:
  *                type: string
+ *                example: FR
+ *                description: The country
  *             latitude:
  *                type: string
+ *                description: The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates
  *             longitude:
  *                type: string
+ *                descriprion : The longitude (east-West) for the location point to search around. The value is a floating number between -180 and +180. It uses GPS coordinates.
  */
 
 const Sequelize = require('sequelize');

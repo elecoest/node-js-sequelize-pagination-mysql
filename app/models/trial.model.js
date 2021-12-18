@@ -11,18 +11,26 @@
  *           type: boolean
  *         name:
  *           type: string
+ *           description: The name of the item.
  *         startDate:
- *           type: date
+ *           type: string
+ *           format: date
+ *           description : The start date of the trial 
  *         image:
  *           type: string
+ *           description: An image of the trial. Relative path of the image.
  *         format:
  *           type: string
  *         league:
  *           type: string
  *         status:
  *           type: string
+ *           enum: [scheduled, cancelled, rescheduled, postponed]
+ *           description: status is an enumeration type whose instances represent several states that an Trial may be in.
  *         event_id:
- *           type: string
+ *           type: integer
+ *         drafting:
+ *           type: integer
  *         discipline_fftri:
  *           type: string
  *         format_fftri:
@@ -38,6 +46,7 @@
  *         event:
  *           $ref: '#/components/schemas/Event'
  */
+const moment = require('moment'); // require
 
 module.exports = function (sequelize, Sequelize) {
   const Trial = sequelize.define('trial', {
@@ -135,6 +144,9 @@ module.exports = function (sequelize, Sequelize) {
     startDate: {
       type: Sequelize.DATEONLY,
       allowNull: false,
+      get: function () {
+        return moment.utc(this.getDataValue('event_date')).format('YYYY-MM-DD');
+      },
       field: 'event_date'
     },
     image: {
@@ -198,10 +210,10 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false,
       field: 'epreuve_id'
     },
-    // drafting: {
-    //   type: Sequelize.INTEGER,
-    //   allowNull: false
-    // },
+    drafting: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
     // event_place_id: {
     //   type: Sequelize.INTEGER,
     //   allowNull: false

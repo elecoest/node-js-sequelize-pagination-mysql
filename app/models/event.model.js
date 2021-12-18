@@ -11,12 +11,16 @@
  *           type: boolean
  *         name:
  *           type: string
+ *           description: Event name.
  *         website_url: 
  *           type: string
+ *           format: uri
  *         facebook_url:
  *           type: string
+ *           format: uri
  *         image:
  *           type: string
+ *           description: An image of the trial. Relative path of the image.
  *         place_id: 
  *           type: integer
  *         trials : 
@@ -25,6 +29,7 @@
  *              $ref: '#/components/schemas/Trial'
  *         location: 
  *           $ref: '#/components/schemas/Location'
+ *           description : The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
  */
 
 const Sequelize = require('sequelize');

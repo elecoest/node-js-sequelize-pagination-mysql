@@ -9,9 +9,11 @@
  *           type: integer
  *         name:
  *           type: string
+ *           description: The name of the item.
  *         startDate: 
  *           type: string
- *           format: date-time
+ *           format: date
+ *           description : The start date of the edition 
  *         trial_id: 
  *           type: integer
  *         trial:
@@ -23,6 +25,7 @@
 */
 
 const Sequelize = require('sequelize');
+const moment = require('moment');
 
 module.exports = function (sequelize, DataTypes) {
   const Edition = sequelize.define('edition', {
@@ -65,6 +68,9 @@ module.exports = function (sequelize, DataTypes) {
     startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+      get: function () {
+        return moment.utc(this.getDataValue('startDate')).format('YYYY-MM-DD');
+      },
       field: 'course_date'
     },
     // course_description: {
@@ -145,6 +151,6 @@ module.exports = function (sequelize, DataTypes) {
     ]
   });
 
-  
+
   return Edition;
 };
