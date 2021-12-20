@@ -15,6 +15,22 @@ module.exports = app => {
    *       - FFTri
    *     summary: Retrieve a list of fftris
    *     description: Retrieve a list of fftri
+   *     parameters:
+   *       - in: path
+   *         name: name
+   *         required: false
+   *         schema:
+   *           type: string
+   *       - in: path
+   *         name: page
+   *         required: false
+   *         schema:
+   *           type: integer
+   *       - in: path
+   *         name: sortby
+   *         required: false
+   *         schema:
+   *           type: integer
    *     responses:
    *       200:
    *         description: Get fftris successful

@@ -76,5 +76,5 @@ dist/
 log
 *workspace*
 package-lock.json
-
+yarn.lock
 # @end expo-cli
