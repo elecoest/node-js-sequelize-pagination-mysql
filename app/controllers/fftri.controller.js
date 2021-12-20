@@ -51,7 +51,36 @@ exports.create = (req, res) => {
 
 // Retrieve all Fftris from the database.
 exports.findAll = (req, res) => {
-  const { page, size, name } = req.query;
+  const { page, size, name, sortby } = req.query;
+  let querySort = sortby
+  let sort = [];
+
+  if (querySort) {
+    
+    if (typeof querySort === 'string') {
+      querySort = querySort.split(',');
+    }
+
+    if (Array.isArray(querySort)) {
+      sort = querySort.map(query => {
+        return [
+          query.replace(/^-/, ''),
+          query[0] !== '-' ? 'ASC' : 'DESC'
+        ];
+      });
+    }
+    else {
+      for (let key in querySort) {
+        if (querySort.hasOwnProperty(key)) {
+          sort.push([
+            key,
+            parseInt(querySort[key], 10) > 0 ? 'ASC' : 'DESC'
+          ]);
+        }
+      }
+    }
+  }
+
   var condition = name ? { name: { [Op.like]: `%${name}%` } } : {};
 
   if (page == 0) {
@@ -63,7 +92,7 @@ exports.findAll = (req, res) => {
 
   const { limit, offset } = getPagination(page - 1, size);
 
-  Fftri.findAndCountAll({ where: condition, limit, offset, include: [{ all: true, nested: true }] })
+  Fftri.findAndCountAll({ where: condition, order: sort, limit, offset, include: [{ all: true, nested: true }] })
     .then(data => {
       const response = getPagingData(data, page, limit);
       res.status(200).send(response);
