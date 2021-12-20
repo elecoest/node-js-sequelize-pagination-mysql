@@ -12,7 +12,7 @@ module.exports = app => {
    *     security:
    *       - bearerAuth: []
    *     tags:
-   *       - Fftris
+   *       - FFTri
    *     summary: Retrieve a list of fftris
    *     description: Retrieve a list of fftri
    *     responses:
@@ -51,7 +51,7 @@ module.exports = app => {
    *     security:
    *       - bearerAuth: []
    *     tags:
-   *       - Fftris
+   *       - FFTri
    *     summary: Retrieve a single fftri with id
    *     description: Retrieve a single fftri. 
    *     parameters:
@@ -91,8 +91,8 @@ module.exports = app => {
   /**
   * @swagger
   * tags:
-  *   - name: Fftri
-  *     description: fftri endpoint
+  *   - name: FFTri
+  *     description: FFTri endpoint
   */
   app.use('/v1/fftri', router);
 };
