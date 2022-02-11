@@ -122,6 +122,7 @@ require("./app/routes/fftri.routes")(app)
 require("./app/routes/edition.routes")(app)
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/content.routes')(app);
 
 /*
 db.sequelize.sync({force: false}).then(() => {

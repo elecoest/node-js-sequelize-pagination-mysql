@@ -27,9 +27,10 @@ db.trials = require("./trial.model.js")(sequelize, Sequelize);
 db.fftris = require("./fftri.model.js")(sequelize, Sequelize);
 db.editions = require("./edition.model.js")(sequelize, Sequelize);
 db.places = require("./place.model.js")(sequelize, Sequelize);
-db.roles = require("../models/role.model.js")(sequelize, Sequelize);
-db.users = require("../models/user.model.js")(sequelize, Sequelize);
-db.refreshToken = require("../models/refreshToken.model.js")(sequelize, Sequelize);
+db.contents = require("./content.model.js")(sequelize, Sequelize);
+db.roles = require("./role.model.js")(sequelize, Sequelize);
+db.users = require("./user.model.js")(sequelize, Sequelize);
+db.refreshToken = require("./refreshToken.model.js")(sequelize, Sequelize);
 
 db.roles.belongsToMany(db.users, { through: "zfv71_fftri_user_roles", foreignKey: "roleId", otherKey: "userId" });
 db.users.belongsToMany(db.roles, { through: "zfv71_fftri_user_roles", foreignKey: "userId", otherKey: "roleId" });
